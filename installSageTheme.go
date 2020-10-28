@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func installSageTheme(wordpressPath string) {
+func installSageTheme() {
 
 	directoryTheme := ""
 	survey.AskOne(&survey.Input{Message: "Nom du répertoire du thème?", Default: "theme"}, &directoryTheme)
@@ -40,4 +40,6 @@ func installSageTheme(wordpressPath string) {
 	)
 
 	copyFile("templates/sage/acf/acf.php", fmt.Sprintf("%s/wp-content/themes/%s/app/acf.php", wordpressPath, directoryTheme))
+
+	runCommand(fmt.Sprintf("wp --path=%s theme activate %s/resources", wordpressPath, directoryTheme))
 }

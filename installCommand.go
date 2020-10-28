@@ -8,6 +8,8 @@ import (
 	"os"
 )
 
+var wordpressPath string
+
 var installCommand = &cli.Command{
 	Name: "install",
 	Desc: "install needed binaries",
@@ -25,25 +27,26 @@ var installCommand = &cli.Command{
 				os.Exit(1)
 			}
 
-			wordpressPath := ""
 			survey.AskOne(&survey.Input{Message: "Dans quel répertoire ?", Default: "wordpress"}, &wordpressPath)
 
 			if wordpressPath == "" {
 				os.Exit(1)
 			}
 
-			downloadWordPress(wordpressPath)
+			downloadWordPress()
 
-			cleanUpDefaultWordPress(wordpressPath)
+			cleanUpDefaultWordPress()
 
-			prepareWpConfig(wordpressPath)
+			prepareWpConfig()
 			
-			createWpCliConfig(wordpressPath)
+			createWpCliConfig()
+
+			installWordPress()
 
 			installSage := false
 			survey.AskOne(&survey.Confirm{Message: "Est-ce que l'on doit installer le thème Sage ?"}, &installSage)
 			if installSage == true {
-				installSageTheme(wordpressPath)
+				installSageTheme()
 			}
 		}
 
@@ -51,11 +54,11 @@ var installCommand = &cli.Command{
 	},
 }
 
-func createWpCliConfig(wordpressPath string) {
+func createWpCliConfig() {
 	copyFile("templates/wp-cli.yml", fmt.Sprintf("%s/wp-cli.yml", wordpressPath))
 }
 
-func downloadWordPress(wordpressPath string) {
+func downloadWordPress() {
 	cmd, err := runCommand(fmt.Sprintf("wp core download --locale=fr_FR --path=%s", wordpressPath))
 
 	if err != nil {
@@ -65,7 +68,7 @@ func downloadWordPress(wordpressPath string) {
 	fmt.Print(cmd)
 }
 
-func cleanUpDefaultWordPress(wordpressPath string) {
+func cleanUpDefaultWordPress() {
 	fileToRemove := []string{
 		"wp-content/plugins/hello.php",
 		"wp-content/plugins/akismet",
@@ -79,7 +82,7 @@ func cleanUpDefaultWordPress(wordpressPath string) {
 	}
 }
 
-func prepareWpConfig(wordpressPath string) {
+func prepareWpConfig() {
 	var qs = []*survey.Question{
 		{
 			Name: "dbname",

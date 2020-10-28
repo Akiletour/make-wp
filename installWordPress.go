@@ -10,13 +10,13 @@ import (
 var wordpressInstallCommand = &cli.Command{
 	Name: "install-wp",
 	Fn: func(ctx *cli.Context) error {
-		installWordPress("")
+		installWordPress()
 
 		return nil
 	},
 }
 
-func installWordPress(wordpressPath string) {
+func installWordPress() {
 
 	if wordpressPath == "" {
 		survey.AskOne(&survey.Input{Message: "Dans quel répertoire ?", Default: "wordpress"}, &wordpressPath)
@@ -25,8 +25,6 @@ func installWordPress(wordpressPath string) {
 			os.Exit(1)
 		}
 	}
-
-	println(wordpressPath)
 
 	siteTitle := "Mon nouveau site"
 	adminUser := "inrage"
@@ -41,4 +39,14 @@ func installWordPress(wordpressPath string) {
 	)
 
 	println(cmd)
+
+	postInstallWordpress()
+}
+
+func postInstallWordpress() {
+	commander := fmt.Sprintf("wp --path=%s", wordpressPath)
+	runCommand(fmt.Sprintf("%s post delete 1 2 --force", commander))
+	runCommand(fmt.Sprintf("%s comment delete 1 --force", commander))
+	runCommand(fmt.Sprintf("%s rewrite structure '/%%postname%%/' --hard", commander))
+	runCommand(fmt.Sprintf("%s rewrite flush --hard", commander))
 }
