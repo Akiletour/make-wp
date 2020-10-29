@@ -2,7 +2,13 @@ Permet de démarrer rapidement un projet WordPress avec tous les outils pré-ins
 
 - Dernière version de **WordPress**
 - Thème de roots/sage en version 9
-- Installation des extensions **Yoast SEO, Contact Form 7, Classic Editor, Duplicate Post, Custom Post Type UI et ACF Pro**
+- Installation des extensions 
+    - Yoast SEO, 
+    - Contact Form 7, 
+    - Classic Editor, 
+    - Duplicate Post, 
+    - Custom Post Type UI 
+    - ACF Pro (Avec gestion de la clé)
 
 
 ## Usage
