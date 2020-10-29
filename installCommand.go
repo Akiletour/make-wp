@@ -33,10 +33,6 @@ var installCommand = &cli.Command{
 				os.Exit(1)
 			}
 
-			installExtensions()
-
-			os.Exit(1)
-
 			downloadWordPress()
 
 			cleanUpDefaultWordPress()
