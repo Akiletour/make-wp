@@ -11,8 +11,8 @@ type appT struct {
 }
 
 var app = appT{
-	"pomdok",
-	"v1.2.0",
+	"make-wp",
+	"v1",
 }
 
 type rootT struct {
@@ -31,7 +31,7 @@ var rootCommand = &cli.Command{
 	Fn: func(ctx *cli.Context) error {
 		printHeader()
 
-		fmt.Print("Usage: pomdok <command>\n")
+		fmt.Print("Usage: make-wp <command>\n")
 		fmt.Printf("More information on usage with %s command.\n", "help")
 
 		return nil
