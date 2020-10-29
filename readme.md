@@ -1,3 +1,18 @@
+Permet de démarrer rapidement un projet WordPress avec tous les outils pré-installer.
+
+- Dernière version de **WordPress**
+- Thème de roots/sage en version 9
+- Installation des extensions **Yoast SEO, Contact Form 7, Classic Editor, Duplicate Post, Custom Post Type UI et ACF Pro**
+
+
+## Usage
+
+```
+make-wp install
+```
+
+## Description
+
 ### Installation de WordPress
 
 1) Téléchargement automatique de WordPress dans le répertoire désiré,
