@@ -77,6 +77,8 @@ func installExtensions() {
 	survey.AskOne(&survey.Password{Message: "Clé ACF ?"}, &acfProKey)
 
 	if acfProKey != "" {
-		runCommand(fmt.Sprintf("%s plugin install --activate \"http://connect.advancedcustomfields.com/index.php?p=pro&a=download&k=%s\"", commander, acfProKey))
+		acfCmd, _ := runCommand(fmt.Sprintf("%s plugin install --activate \"http://connect.advancedcustomfields.com/index.php?p=pro&a=download&k=%s\"", commander, acfProKey))
+
+		println(acfCmd)
 	}
 }
